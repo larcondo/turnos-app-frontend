@@ -16,7 +16,7 @@ const Login = () => {
       const res = await userService.login({ email, password })
       if (res.accessToken) {
         setUser(res)
-        navigate('/turnos')
+        navigate('/')
       }
     } catch(err) {
       console.log('Login error:', err)

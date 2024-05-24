@@ -11,7 +11,8 @@ const TopNav = () => {
         Turnos
       </h1>
       <div className='flex justify-center'>
-        <Link to='/turnos' className={linkClass}>Turnos</Link>
+        <Link to='/' className={linkClass}>Turnos</Link>
+        <Link to='/calendar' className={linkClass}>Calendar</Link>
         <Link to='/solicitar' className={linkClass}>Solicitar</Link>
         <Link to='/misturnos' className={linkClass}>Mis turnos</Link>
       </div>
