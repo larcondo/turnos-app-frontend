@@ -1,0 +1,36 @@
+import { createBrowserRouter } from 'react-router-dom'
+
+import App from './App'
+import Turnos from './components/pages/Turnos'
+import Login from './components/pages/Login'
+import Solicitar from './components/pages/Solicitar'
+import TurnosDeUsuario from './components/pages/TurnosDeUsuario'
+
+const username: string = 'QuiGon';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <App />,
+    children: [
+      {
+        path: '/turnos',
+        element: <Turnos />,
+      },
+      {
+        path: '/login',
+        element: <Login />,
+      },
+      {
+        path: '/solicitar',
+        element: <Solicitar />,
+      },
+      {
+        path: '/misturnos',
+        element: <TurnosDeUsuario username={username} />,
+      }
+    ]
+  }
+]);
+
+export default router

@@ -1,6 +1,7 @@
 export interface TurnBasic {
   cancha: string;
   estado: string;
+  fecha: string;
   inicio: string;
   fin: string; 
 }
@@ -23,4 +24,23 @@ export enum CanchasDisponibles {
   Cancha2 = 'cancha 2',
   Cancha3 = 'cancha 3',
   Cancha4 = 'cancha 4'
+}
+
+export interface TurnResponse {
+  cantidad: number;
+  page: number;
+  pages: number;
+  offset: number;
+  turnos: TurnRecord[];
+}
+
+export interface UserCredentials {
+  email: string;
+  password: string;
+}
+
+export interface UserInformation {
+  email: string;
+  nombre: string;
+  accessToken: string;
 }
