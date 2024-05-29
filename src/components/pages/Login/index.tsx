@@ -3,11 +3,13 @@ import { useNavigate } from 'react-router-dom'
 import userService from '../../../services/usuarios'
 import { useRecoilState } from 'recoil'
 import { userState } from '../../../states/atoms'
+import { setToken } from '../../../utils/token'
+import { UserInformation } from '../../../types'
 
 const Login = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [, setUser] = useRecoilState(userState)
+  const [email, setEmail] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
+  const [, setUser] = useRecoilState<UserInformation | null>(userState)
   const navigate = useNavigate()
 
   const onSubmit = async (e: React.SyntheticEvent) => {
@@ -16,6 +18,7 @@ const Login = () => {
       const res = await userService.login({ email, password })
       if (res.accessToken) {
         setUser(res)
+        setToken(res.accessToken)
         navigate('/')
       }
     } catch(err) {

@@ -2,6 +2,8 @@ import axios from 'axios';
 import { authBaseUrl } from '../contants';
 import { UserCredentials, UserInformation } from '../types';
 
+axios.defaults.withCredentials = true;
+
 const login = async (credentials: UserCredentials) => {
   const url: string = `${authBaseUrl}/usuarios/login`
 
@@ -14,6 +16,15 @@ const login = async (credentials: UserCredentials) => {
   return data
 };
 
+const logout = async () => {
+  const url: string = `${authBaseUrl}/usuarios/logout`
+
+  const { data, status } = await axios.get(url)
+  
+  return { data, status }
+}
+
 export default {
-  login
+  login,
+  logout
 }

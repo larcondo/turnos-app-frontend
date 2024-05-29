@@ -1,17 +1,33 @@
-import axios from 'axios';
-import { apiBaseUrl } from '../contants';
-import { TurnResponse } from '../types';
+import axiosWithAuth from './axios';
+import { CantidadPorFecha, TurnResponse, TurnStates } from '../types';
 
-const getAll = async (token: string) => {
-  const url: string = `${apiBaseUrl}/turnos`;
-  const { data } = await axios.get<TurnResponse>(url, {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  });
+const getAll = async () => {
+  const url: string = '/turnos';
+  const { data } = await axiosWithAuth.get<TurnResponse>(url);
   return data;
 };
 
+const getQtyByYearMonth = async (prefix: string) => {
+  const url: string = `/turnos/count/yearmonth?prefix=${prefix}`
+  const { data } = await axiosWithAuth.get<CantidadPorFecha[]>(url);
+  return data;
+}
+
+const getByDate = async (date: string) => {
+  const url: string = `/turnos?fecha=${date}&&estado=${TurnStates.Disponible}`;
+  const { data } = await axiosWithAuth.get<TurnResponse>(url);
+  return data;
+}
+
+const getByClient = async () => {
+  const url: string = '/turnos?client';
+  const { data } = await axiosWithAuth.get<TurnResponse>(url);
+  return data;
+}
+
 export default {
-  getAll
+  getAll,
+  getQtyByYearMonth,
+  getByDate,
+  getByClient,
 }

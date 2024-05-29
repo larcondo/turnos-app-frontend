@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import TopNav from './components/TopNav/index';
+import TopNav from './components/common/TopNav';
 
 function App() {
 
