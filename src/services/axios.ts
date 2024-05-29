@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { apiBaseUrl, authBaseUrl } from '../contants';
 import { getToken, setToken } from '../utils/token';
-// import { NewToken } from '../types';
 
 const axiosWithAuth = axios.create({
   baseURL: apiBaseUrl,
