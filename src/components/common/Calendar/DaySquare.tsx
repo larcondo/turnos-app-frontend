@@ -1,68 +1,39 @@
-const fakeValues = [
-  { fecha: '2024-05-01', cantidad: 3 },
-  { fecha: '2024-05-02', cantidad: 9 },
-  { fecha: '2024-05-03', cantidad: 3 },
-  { fecha: '2024-05-04', cantidad: 7 },
-  { fecha: '2024-05-05', cantidad: 7 },
-  { fecha: '2024-05-06', cantidad: 0 },
-  { fecha: '2024-05-07', cantidad: 8 },
-  { fecha: '2024-05-08', cantidad: 2 },
-  { fecha: '2024-05-09', cantidad: 5 },
-  // { fecha: '2024-05-10', cantidad: 2 },
-  // { fecha: '2024-05-11', cantidad: 6 },
-  // { fecha: '2024-05-12', cantidad: 7 },
-  // { fecha: '2024-05-13', cantidad: 0 },
-  // { fecha: '2024-05-14', cantidad: 7 },
-  // { fecha: '2024-05-15', cantidad: 7 },
-  // { fecha: '2024-05-16', cantidad: 3 },
-  // { fecha: '2024-05-17', cantidad: 4 },
-  { fecha: '2024-05-18', cantidad: 2 },
-  { fecha: '2024-05-19', cantidad: 3 },
-  // { fecha: '2024-05-20', cantidad: 8 },
-  // { fecha: '2024-05-21', cantidad: 5 },
-  // { fecha: '2024-05-22', cantidad: 6 },
-  // { fecha: '2024-05-23', cantidad: 6 },
-  // { fecha: '2024-05-24', cantidad: 5 },
-  // { fecha: '2024-05-25', cantidad: 0 },
-  // { fecha: '2024-05-26', cantidad: 3 },
-  // { fecha: '2024-05-27', cantidad: 9 },
-  // { fecha: '2024-05-28', cantidad: 7 },
-  // { fecha: '2024-05-29', cantidad: 4 },
-  // { fecha: '2024-05-30', cantidad: 0 },
-  // { fecha: '2024-05-31', cantidad: 2 }
-]
-
+import { CantidadPorFecha } from "../../../types";
+import { MAX_TURNS_PER_DAY } from "../../../contants";
 interface DaySquareProps {
   dateValue: string;
+  turnos: CantidadPorFecha[];
 }
 
-const DaySquare = ({ dateValue }: DaySquareProps) => {
+const DaySquare = ({ dateValue, turnos }: DaySquareProps) => {
+  if (!turnos) return null
+  
   const dayNum = dateValue.split('-')[2]
-  const turnosDisponibles = fakeValues.find(d => d.fecha === dateValue)?.cantidad || 0
+  const turnosDisponibles = turnos.find(d => d.fecha === dateValue)?.cantidad || 0
   let divClass = ''
   let dayNumClass = ''
 
   // 3, 6, 9 10
   switch (true) {
-    case turnosDisponibles < 1:
+    case turnosDisponibles < (1):
       divClass = 'flex flex-col justify-start bg-gray-50 aspect-square rounded border-2 border-gray-100 cursor-pointer'
       dayNumClass = 'text-xs pb-0.5 px-2 text-gray-300 bg-gray-100'
       break;
-    case turnosDisponibles < 3:
+    case turnosDisponibles < (0.3*MAX_TURNS_PER_DAY):
       divClass = 'flex flex-col justify-start bg-teal-300/40 aspect-square rounded border-2 border-teal-300/25 cursor-pointer hover:border-teal-500'
       dayNumClass = 'text-xs pb-0.5 px-2 text-teal-600 bg-teal-300/40'
       break;
-    case turnosDisponibles < 6:
+    case turnosDisponibles < (0.6*MAX_TURNS_PER_DAY):
       divClass = 'flex flex-col justify-start bg-teal-300/50 aspect-square rounded border-2 border-teal-300/50 cursor-pointer hover:border-teal-500'
       dayNumClass = 'text-xs pb-0.5 px-2 text-teal-600 bg-teal-300/50'
       break;
-    case turnosDisponibles < 9:
+    case turnosDisponibles < (0.9*MAX_TURNS_PER_DAY):
       divClass = 'flex flex-col justify-start bg-teal-300/75 aspect-square rounded border-2 border-teal-300/75 cursor-pointer hover:border-teal-500'
       dayNumClass = 'text-xs pb-0.5 px-2 text-teal-600 bg-teal-300/75'
       break;
     default:
-      divClass = 'flex flex-col justify-start bg-teal-300 aspect-square rounded border-2 border-teal-300 cursor-pointer hover:border-teal-500'
-      dayNumClass = 'text-xs pb-0.5 px-2 text-teal-600 bg-teal-300'
+      divClass = 'flex flex-col justify-start bg-teal-300 aspect-square rounded border-2 border-teal-400 cursor-pointer hover:border-teal-500'
+      dayNumClass = 'text-xs pb-0.5 px-2 text-teal-600 bg-teal-400'
   }
 
   // const divClass: string = turnosDisponibles > 0
@@ -74,7 +45,7 @@ const DaySquare = ({ dateValue }: DaySquareProps) => {
   //   : 'text-xs px-2 text-teal-600 bg-gray-200';
   
   return(
-    <div className={divClass}>
+    <div className={divClass} onClick={() => console.log(dateValue)}>
       <p className={dayNumClass}>{ dayNum }</p>
       <div className='flex flex-col justify-center flex-1'>
       { turnosDisponibles > 0

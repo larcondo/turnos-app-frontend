@@ -44,3 +44,12 @@ export interface UserInformation {
   nombre: string;
   accessToken: string;
 }
+
+export interface NewToken {
+  accessToken: string;
+}
+
+export interface CantidadPorFecha {
+  cantidad: number;
+  fecha: string
+}

@@ -1,6 +1,11 @@
+import { CantidadPorFecha } from "../../../types";
 import DaySquare from "./DaySquare";
 
-const Calendar = () => {
+interface CalendarProps {
+  data: CantidadPorFecha[];
+}
+
+const Calendar = ({ data }: CalendarProps) => {
   const headerClass: string = 'text-center text-sm font-semibold';
 
   const fecha: string = '2024-05';
@@ -33,7 +38,7 @@ const Calendar = () => {
     }
   }
 
-  const daysArray = generateDaysArray(fecha);
+  const daysArray = generateDaysArray(fecha)
 
   return(
     <div className='grid grid-cols-7 gap-1 my-10 mx-auto w-3/5'>
@@ -50,7 +55,13 @@ const Calendar = () => {
       { spanVariants[daysArray.span] && <div className={`${spanVariants[daysArray.span]}`}></div> }
       
       {
-        daysArray.days.map( d => <DaySquare key={d} dateValue={`${fecha}-${(d+1).toString().padStart(2,'0')}`} />)
+        daysArray.days.map( d => {
+          return <DaySquare
+            key={d}
+            dateValue={`${fecha}-${(d+1).toString().padStart(2,'0')}`}
+            turnos={data}  
+          />
+        })
       }
     </div>
   )

@@ -3,7 +3,6 @@ import { createBrowserRouter } from 'react-router-dom'
 import App from './App'
 import Turnos from './components/pages/Turnos'
 import Login from './components/pages/Login'
-import Calendar from './components/pages/Calendar'
 import Solicitar from './components/pages/Solicitar'
 import TurnosDeUsuario from './components/pages/TurnosDeUsuario'
 
@@ -22,10 +21,6 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: <Login />,
-      },
-      {
-        path: '/calendar',
-        element: <Calendar />,
       },
       {
         path: '/solicitar',
