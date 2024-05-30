@@ -5,6 +5,8 @@ import Turnos from './components/pages/Turnos'
 import Login from './components/pages/Login'
 import Solicitar from './components/pages/Solicitar'
 import TurnosDeUsuario from './components/pages/TurnosDeUsuario'
+import CantidadesDelDia from './components/pages/CantidadesDelDia'
+import TurnosDelDia from './components/pages/TurnosDelDia'
 
 const username: string = 'QuiGon';
 
@@ -21,6 +23,14 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: <Login />,
+      },
+      {
+        path: '/turnos',
+        element: <TurnosDelDia />,
+      },
+      {
+        path: '/cantidades/:day',
+        element: <CantidadesDelDia />,
       },
       {
         path: '/solicitar',

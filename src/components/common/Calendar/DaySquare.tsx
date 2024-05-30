@@ -1,5 +1,7 @@
 import { CantidadPorFecha } from "../../../types";
 import { MAX_TURNS_PER_DAY } from "../../../contants";
+import { Link } from "react-router-dom";
+
 interface DaySquareProps {
   dateValue: string;
   turnos: CantidadPorFecha[];
@@ -45,19 +47,21 @@ const DaySquare = ({ dateValue, turnos }: DaySquareProps) => {
   //   : 'text-xs px-2 text-teal-600 bg-gray-200';
   
   return(
-    <div className={divClass} onClick={() => console.log(dateValue)}>
-      <p className={dayNumClass}>{ dayNum }</p>
-      <div className='flex flex-col justify-center flex-1'>
-      { turnosDisponibles > 0
-          ? <>
-              <p className='text-sm text-center font-semibold text-teal-600'>{ turnosDisponibles }</p>
-              <p className='text-xs text-center text-gray-600 text-teal-500'>turnos</p>
-            </>
-          : <p className='text-xs text-center text-gray-300'>Sin turnos disponibles</p>
-      }
+    <Link to={`/cantidades/${dateValue}`}>
+      <div className={divClass}>
+        <p className={dayNumClass}>{ dayNum }</p>
+        <div className='flex flex-col justify-center flex-1'>
+        { turnosDisponibles > 0
+            ? <>
+                <p className='text-sm text-center font-semibold text-teal-600'>{ turnosDisponibles }</p>
+                <p className='text-xs text-center text-gray-600 text-teal-500'>turnos</p>
+              </>
+            : <p className='text-xs text-center text-gray-300'>Sin turnos disponibles</p>
+        }
+        </div>
+        
       </div>
-      
-    </div>
+    </Link>
   )
 }
 
