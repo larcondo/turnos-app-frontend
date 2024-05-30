@@ -1,4 +1,5 @@
-import { TurnRecord } from "../../../types"
+import { TurnRecord } from '@/types'
+
 const TurnosGrid = ({ turnos }: { turnos: TurnRecord[]}) => {
   if (!turnos || turnos.length < 1) return null
   

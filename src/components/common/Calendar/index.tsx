@@ -1,4 +1,4 @@
-import { CantidadPorFecha } from "../../../types";
+import { CantidadPorFecha } from "@/types"
 import DaySquare from "./DaySquare";
 
 interface CalendarProps {

@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { authBaseUrl } from '../contants';
-import { UserCredentials, UserInformation } from '../types';
+import { authBaseUrl } from '@/contants';
+import { UserCredentials, UserInformation } from '@/types';
 
 axios.defaults.withCredentials = true;
 

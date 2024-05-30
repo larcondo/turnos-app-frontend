@@ -1,4 +1,4 @@
-import { CanchasDisponibles } from "../../../types"
+import { CanchasDisponibles } from "@/types";
 
 const buttonClass: string = 'bg-teal-300 py-8 px-6 rounded-lg flex-1 mx-4 hover:bg-teal-400';
 

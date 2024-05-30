@@ -1,5 +1,5 @@
 import axiosWithAuth from './axios';
-import { CantidadPorFecha, TurnResponse, TurnStates } from '../types';
+import { CantidadPorFecha, TurnResponse, TurnStates } from '@/types';
 
 const getAll = async () => {
   const url: string = '/turnos';

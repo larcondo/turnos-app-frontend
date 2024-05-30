@@ -1,9 +1,10 @@
 import { useRecoilState } from 'recoil'
-import { userState } from '../../../states/atoms'
-import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import turnosService from '../../../services/turnos';
-import { CantidadPorFecha } from '../../../types';
+import { useNavigate } from 'react-router-dom'
+import { userState } from '@/states/atoms';
+import { CantidadPorFecha } from '@/types';
+
+import turnosService from '@services/turnos';
 
 import Calendar from '../../common/Calendar';
 

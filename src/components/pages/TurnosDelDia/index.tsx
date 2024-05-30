@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
 import { useSearchParams } from "react-router-dom"
-import { TurnRecord, TurnResponse } from "../../../types"
+import { TurnRecord, TurnResponse } from "@/types"
 
-import turnService from '../../../services/turnos'
+import turnService from '@services/turnos'
 
 const TurnosDelDia = () => {
   const [searchParams] = useSearchParams()
@@ -12,9 +12,6 @@ const TurnosDelDia = () => {
 
   useEffect(() => {
     const fetchInfo = async () => {
-      // const cancha = searchParams.get('cancha') 
-      // const fecha = searchParams.get('fecha')
-    
       try {
         if (typeof cancha === 'string' && typeof fecha === 'string') {
           const res = await turnService.getDaysTurns(fecha, cancha)

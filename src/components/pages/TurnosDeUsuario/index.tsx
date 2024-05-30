@@ -1,5 +1,6 @@
-import { turnos } from '../../../data/turnos'
-import TurnosTable from '../Turnos/TurnosTable'
+import { turnos } from '@/data/turnos'
+
+import TurnosTable from '@components/pages/Turnos/TurnosTable'
 
 const TurnosDeUsuario = ({ username }: { username: string }) => {
 

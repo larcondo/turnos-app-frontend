@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import userService from '../../../services/usuarios'
-import { UserInformation } from '../../../types'
+import userService from '@services/usuarios'
+import { UserInformation } from '@/types'
 
 const formClass = "p-4 max-w-96 mx-auto flex flex-col gap-4 items-stretch border-2"
 const labelClass = "text-base text-gray-600"

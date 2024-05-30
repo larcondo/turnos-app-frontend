@@ -7,10 +7,9 @@ export const turnos: TurnRecord[] = [
       "solicitadoPor": "Luke",
       "confirmadoPor": "Administrador 2",
       "estado": "confirmado",
-      "inicio": "2024-05-17 14:00",
-      "fin": "2024-05-17 16:00",
-    //   "updated_at": "2024-05-18 03:07:31",
-    //   "created_at": "2024-05-18 01:58:16"
+      "fecha": "2024-05-17",
+      "inicio": "14:00",
+      "fin": "16:00"
   },
   {
       "id": "953bb626-5940-4816-9f52-6a38353aed7e",
@@ -18,10 +17,9 @@ export const turnos: TurnRecord[] = [
       "solicitadoPor": "Hans",
       "confirmadoPor": "Administrador 1",
       "estado": "confirmado",
-      "inicio": "2024-05-17 18:00",
-      "fin": "2024-05-17 19:00",
-    //   "updated_at": "2024-05-18 03:06:36",
-    //   "created_at": "2024-05-18 02:16:52"
+      "fecha": "2024-05-17",
+      "inicio": "18:00",
+      "fin": "19:00"
   },
   {
       "id": "eb921438-06f9-4f77-a9f1-45a6320e855a",
@@ -29,10 +27,9 @@ export const turnos: TurnRecord[] = [
       "solicitadoPor": "QuiGon",
       "confirmadoPor": "Administrador 1",
       "estado": "confirmado",
-      "inicio": "2024-05-17 19:00",
-      "fin": "2024-05-17 20:00",
-    //   "updated_at": "2024-05-18 03:07:04",
-    //   "created_at": "2024-05-18 02:17:07"
+      "fecha": "2024-05-17",
+      "inicio": "2024-05-17",
+      "fin": "2024-05-17"
   },
   {
       "id": "5e774c2a-e948-4531-b060-1264ef631cb1",
@@ -40,10 +37,9 @@ export const turnos: TurnRecord[] = [
       "solicitadoPor": null,
       "confirmadoPor": null,
       "estado": "disponible",
-      "inicio": "2024-05-17 19:00",
-      "fin": "2024-05-17 20:00",
-    //   "updated_at": "2024-05-18 02:47:39",
-    //   "created_at": "2024-05-18 02:45:01"
+      "fecha": "2024-05-17",
+      "inicio": "2024-05-17",
+      "fin": "2024-05-17"
   },
   {
       "id": "a655b5f6-b6d7-451c-a2cd-bf98d8289055",
@@ -51,9 +47,8 @@ export const turnos: TurnRecord[] = [
       "solicitadoPor": "Leia",
       "confirmadoPor": "Administrador 2",
       "estado": "confirmado",
-      "inicio": "2024-05-17 16:00",
-      "fin": "2024-05-17 17:00",
-    //   "updated_at": "2024-05-18 03:07:55",
-    //   "created_at": "2024-05-18 02:53:22"
+      "fecha": "2024-05-17",
+      "inicio": "2024-05-17",
+      "fin": "2024-05-17"
   }
 ];

@@ -1,5 +1,5 @@
-import { CantidadPorFecha } from "../../../types";
-import { MAX_TURNS_PER_DAY } from "../../../contants";
+import { CantidadPorFecha } from "@/types"
+import { MAX_TURNS_PER_DAY } from "@/contants";
 import { Link } from "react-router-dom";
 
 interface DaySquareProps {

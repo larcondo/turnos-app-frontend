@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom'
 import { useRecoilState } from 'recoil';
-import { userState } from '../../../states/atoms';
-import userService from '../../../services/usuarios';
 import { useNavigate } from 'react-router-dom';
+import { userState} from '@states/atoms';
+
+import userService from '@services/usuarios';
 
 const TopNav = () => {
   const [user, setUser] = useRecoilState(userState);

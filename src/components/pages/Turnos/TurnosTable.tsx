@@ -1,4 +1,4 @@
-import { TurnRecord } from '../../../types'
+import { TurnRecord } from '@/types';
 
 const tableClass: string = 'table-auto mx-auto my-5';
 

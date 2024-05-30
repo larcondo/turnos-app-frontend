@@ -1,7 +1,7 @@
 import { useParams, Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
-import turnosService, { CountGroup } from '../../../services/turnos'
+import turnosService, { CountGroup } from '@services/turnos'
 
 const CantidadesDelDia = () => {
   const [cantidades, setCantidades] = useState<CountGroup[]>([])

@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom'
 import { useRecoilState } from 'recoil'
-import { userState } from '../../../states/atoms'
-import { setToken } from '../../../utils/token'
-import { UserInformation } from '../../../types'
+import { userState } from '@states/atoms'
+import { setToken } from '@utils/token'
+import { UserInformation } from '@/types'
 
 import LoginForm from './LoginForm'
 
