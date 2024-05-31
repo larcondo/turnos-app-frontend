@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { useRecoilState } from 'recoil';
 import { useNavigate } from 'react-router-dom';
 import { userState} from '@states/atoms';
+import { UserRoles } from '@/types';
 
 import userService from '@services/usuarios';
 
@@ -33,8 +34,8 @@ const TopNav = () => {
       <div className='flex justify-center'>
         { user && <Link to='/' className={linkClass}>Turnos</Link> }
         { user && <Link to='/solicitar' className={linkClass}>Solicitar</Link> }
-        { user && <Link to='/misturnos' className={linkClass}>Mis turnos</Link> }
-        { user && <Link to='/solicitar' className={linkClass}>Crear Turnos</Link> }
+        { user && user.rol === UserRoles.Client && <Link to='/misturnos' className={linkClass}>Mis turnos</Link> }
+        { user && user.rol === UserRoles.Admin && <Link to='/solicitar' className={linkClass}>Crear Turnos</Link> }
         { user && <button className={linkClass} onClick={logout}>Log out</button> }
       </div>
     </div>

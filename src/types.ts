@@ -43,6 +43,12 @@ export interface UserInformation {
   email: string;
   nombre: string;
   accessToken: string;
+  rol: string;
+}
+
+export enum UserRoles {
+  Admin = 'admin',
+  Client = 'client',
 }
 
 export interface NewToken {

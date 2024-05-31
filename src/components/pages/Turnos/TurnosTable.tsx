@@ -25,7 +25,6 @@ const TableHeader = () => {
       <th>Inicio</th>
       <th>Fin</th>
       <th>Estado</th>
-      <th>Solicitó</th>
     </tr>
   )
 }
@@ -41,7 +40,6 @@ const TableRow = ({ turno }: { turno: TurnRecord }) => {
       <td className={tdClass}>{ turno.inicio }</td>
       <td className={tdClass}>{ turno.fin }</td>
       <td className={tdClass}>{ turno.estado }</td>
-      <td className={tdClass}>{ turno.solicitadoPor?.substring(0, 8) }...</td>
     </tr>
   )
 }

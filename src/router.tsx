@@ -8,8 +8,6 @@ import TurnosDeUsuario from '@components/pages/TurnosDeUsuario'
 import CantidadesDelDia from '@components/pages/CantidadesDelDia'
 import TurnosDelDia from '@components/pages/TurnosDelDia'
 
-const username: string = 'QuiGon';
-
 const router = createBrowserRouter([
   {
     path: '/',
@@ -38,7 +36,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/misturnos',
-        element: <TurnosDeUsuario username={username} />,
+        element: <TurnosDeUsuario />,
       }
     ]
   }

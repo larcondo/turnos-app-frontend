@@ -43,6 +43,18 @@ const getByClient = async () => {
   return data;
 }
 
+interface RequestTurnRes {
+  id: string;
+  solicitadoPor: string;
+  estado: string;
+}
+
+const requestTurn = async (id: string) => {
+  const url: string = `/turnos/solicitar/${id}`;
+  const { data } = await axiosWithAuth.post<RequestTurnRes>(url);
+  return data;
+}
+
 export default {
   getAll,
   getQtyByYearMonth,
@@ -50,4 +62,5 @@ export default {
   countByDate,
   getDaysTurns,
   getByClient,
+  requestTurn,
 }
