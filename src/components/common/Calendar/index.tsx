@@ -3,12 +3,14 @@ import DaySquare from "./DaySquare";
 
 interface CalendarProps {
   data: CantidadPorFecha[];
+  year: string;
+  month: string;
 }
 
-const Calendar = ({ data }: CalendarProps) => {
+const Calendar = ({ data, year, month }: CalendarProps) => {
   const headerClass: string = 'text-center text-sm font-semibold';
 
-  const fecha: string = '2024-05';
+  const fecha: string = `${year}-${month}`;
 
   const spanVariants: Array<string|null> = [
     'col-span-6',

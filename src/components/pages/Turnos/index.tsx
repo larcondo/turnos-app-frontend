@@ -37,7 +37,7 @@ const Turnos = () => {
       <p>Rol: { user?.rol }</p>
       <h1 className='text-2xl'>Turnos disponibles</h1>
 
-      <Calendar data={cantidades} />
+      <Calendar data={cantidades} year={year} month={month} />
     </div>
   )
 }
