@@ -25,8 +25,6 @@ const TurnoRow = ({ turno }: TurnoRowProps) => {
       const data = await turnosService.requestTurn(id)
 
       setInfo(curr => {
-        if(curr === null) return null
-        
         const turnosArr = curr.turnos
         const turnos = turnosArr.map(t => {
           return (t.id === turno.id)

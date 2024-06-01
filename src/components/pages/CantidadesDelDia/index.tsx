@@ -1,26 +1,35 @@
-import { useParams, Link } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import { useRecoilState } from 'recoil'
+import { dayTurnsQty } from '@/states/atoms'
 
-import turnosService, { CountGroup } from '@services/turnos'
+import turnosService from '@services/turnos'
+import CantidadesGrid from './CantidadesGrid'
+
+const Loading = () => <p>Loading...</p>
 
 const CantidadesDelDia = () => {
-  const [cantidades, setCantidades] = useState<CountGroup[]>([])
+  const [cantidades, setCantidades] = useRecoilState(dayTurnsQty)
+  const [loading, setLoading] = useState<boolean>(true)
   const { day } = useParams()
 
   useEffect(() => {
     const fetchTurnos = async () => {
       try {
         if (typeof day === 'string') {
-          const res = await turnosService.countByDate(day)
-          setCantidades(res)
+          const data = await turnosService.countByDate(day)
+          setCantidades(data)
+          setLoading(false)
         }  
       } catch(err) {
         console.log(err)
       }
     }
-
+    
     void fetchTurnos()
-  }, [day])
+  }, [day, setCantidades])
+
+  if (loading) return <Loading />
 
   return(
     <div className='p-10'>
@@ -30,26 +39,5 @@ const CantidadesDelDia = () => {
     </div>
   )
 }
-
-const CantidadesGrid = ({ cant, day }: { cant: CountGroup[], day: string }) => {
-  if (cant.length < 1) return null
-
-  const containerClass = 'grid grid-cols-2 gap-6 w-96 m-auto'
-  const cantBlockClass = 'p-6 bg-teal-300 flex flex-col items-center rounded'
-
-  return(
-    <div className={containerClass}>
-      { cant.map( g => {
-          return <Link to={`/turnos?cancha=${g.cancha}&fecha=${day}`} key={g.cancha} className={cantBlockClass}>
-            <p className='text-lg font-semibold mb-4'>{ g.cancha }</p>
-            <p className='text-sm'><span className='font-bold'>{ g.cantidad }</span> turnos</p>
-            <p className='text-sm'>disponibles</p>
-          </Link>
-        })
-      }
-    </div>
-  )
-}
-
 
 export default CantidadesDelDia

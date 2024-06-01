@@ -5,7 +5,7 @@ const tableClass: string = 'table-auto mx-auto my-5';
 
 const TurnosTable = ({ turnos }: { turnos: TurnRecord[]}) => {
 
-  if (!turnos || turnos.length < 1) return null
+  if (!turnos || turnos.length < 1) return <p className='text-center py-10'>No existen turnos disponibles para vos.</p>
 
   return(
     <table className={tableClass}>

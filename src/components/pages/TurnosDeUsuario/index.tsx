@@ -1,8 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { useRecoilState } from 'recoil'
-import { userState } from '@/states/atoms'
-import { useEffect, useState } from 'react'
-import { TurnRecord } from '@/types'
+import { userState, userTurns } from '@/states/atoms'
+import { useEffect } from 'react'
 
 import turnosService from '@services/turnos'
 
@@ -10,36 +9,30 @@ import TurnosTable from '@components/pages/Turnos/TurnosTable'
 
 const TurnosDeUsuario = () => {
   const [user] = useRecoilState(userState)
-  const [turnos, setTurnos] = useState<TurnRecord[]>([])
+  const [myTurns, setMyTurns] = useRecoilState(userTurns)
   const navigate = useNavigate()
 
   useEffect(() => {
     const fetchTurnos = async () => {
       try {
-        const res = await turnosService.getByClient()
-        if (res.turnos) {
-          setTurnos(res.turnos)
-        }
+        const { turnos } = await turnosService.getByClient()
+        setMyTurns(turnos)
       } catch(err) {
         console.log(err)
       }
     }
 
-    if (!user) {
-      navigate('/login')
-    } else {
-      void fetchTurnos()
-    }
-  }, [user, navigate])
+    if (!user) return navigate('/login')
+    
+    void fetchTurnos()
+
+  }, [user, navigate, setMyTurns])
 
   return(
     <div className='p-10'>
       <h1 className='text-2xl'>Mis turnos</h1>
       
-      { turnos.length < 1
-        ? <p className='text-center py-10'>No existen turnos disponibles para vos.</p>
-        : <TurnosTable turnos={turnos} />
-      }
+      <TurnosTable turnos={myTurns} />
     </div>
   )
 }

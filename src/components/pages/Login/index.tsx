@@ -24,7 +24,7 @@ const Login = () => {
 
   return(
     <div>
-      <h1 className='text-xl text-center'>Login</h1>
+      <h1 className='text-xl text-center py-6'>Login</h1>
 
       <LoginForm onSuccess={onSuccess} onError={onError} />
 

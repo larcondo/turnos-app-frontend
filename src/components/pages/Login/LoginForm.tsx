@@ -2,7 +2,7 @@ import { useState } from 'react'
 import userService from '@services/usuarios'
 import { UserInformation } from '@/types'
 
-const formClass = "p-4 max-w-96 mx-auto flex flex-col gap-4 items-stretch border-2"
+const formClass = "p-4 max-w-96 mx-auto flex flex-col gap-4 items-stretch"
 const labelClass = "text-base text-gray-600"
 const inputClass = "border-2 rounded px-2 py-1"
 const buttonClass = "bg-blue-400 px-4 py-2 my-4 rounded text-gray-100"
