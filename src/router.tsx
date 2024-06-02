@@ -27,7 +27,7 @@ const router = createBrowserRouter([
         element: <TurnosDelDia />,
       },
       {
-        path: '/cantidades/:day',
+        path: '/cantidades/:fecha',
         element: <CantidadesDelDia />,
       },
       {

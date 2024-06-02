@@ -33,8 +33,7 @@ const Turnos = () => {
 
   return(
     <div className='p-10'>
-      <p>{ user?.nombre }</p>
-      <p>Rol: { user?.rol }</p>
+      <p>{ user?.nombre } { user?.rol ? `(${user.rol})` : null }</p>
       <h1 className='text-2xl'>Turnos disponibles</h1>
 
       <Calendar data={cantidades} year={year} month={month} />
