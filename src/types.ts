@@ -59,3 +59,8 @@ export interface CantidadPorFecha {
   cantidad: number;
   fecha: string
 }
+
+export interface ErrorState {
+  message?: string;
+  title?: string;
+}

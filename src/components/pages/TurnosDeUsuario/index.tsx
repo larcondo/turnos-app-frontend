@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
-import { useRecoilState } from 'recoil'
-import { userState, userTurns } from '@/states/atoms'
+import { useRecoilState, useSetRecoilState } from 'recoil'
+import { userState, userTurns, errorState } from '@states/atoms'
 import { useEffect } from 'react'
 
 import turnosService from '@services/turnos'
@@ -10,6 +10,7 @@ import TurnosTable from '@components/pages/Turnos/TurnosTable'
 const TurnosDeUsuario = () => {
   const [user] = useRecoilState(userState)
   const [myTurns, setMyTurns] = useRecoilState(userTurns)
+  const setError = useSetRecoilState(errorState)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -17,8 +18,13 @@ const TurnosDeUsuario = () => {
       try {
         const { turnos } = await turnosService.getByClient()
         setMyTurns(turnos)
+        throw new Error('Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique nulla quae molestias aut autem ab, accusantium cupiditate nemo eius animi.')
       } catch(err) {
-        console.log(err)
+        if (err instanceof Error) {
+          setError({ title: err.name, message: err.message })
+        } else {
+          console.log(err)
+        }
       }
     }
 
@@ -26,7 +32,7 @@ const TurnosDeUsuario = () => {
     
     void fetchTurnos()
 
-  }, [user, navigate, setMyTurns])
+  }, [user, navigate, setMyTurns, setError])
 
   return(
     <div className='p-10'>

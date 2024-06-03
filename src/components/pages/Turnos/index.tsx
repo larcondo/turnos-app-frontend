@@ -1,8 +1,7 @@
-import { useRecoilState } from 'recoil'
-import { dailyQtyForMonth } from '@/states/atoms';
+import { useRecoilState, useSetRecoilState } from 'recoil'
+import { userState, dailyQtyForMonth, errorState } from '@states/atoms';
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { userState } from '@/states/atoms';
 
 import turnosService from '@services/turnos';
 
@@ -13,6 +12,7 @@ const Turnos = () => {
   const [month] = useState<string>((new Date().getMonth()+1).toString().padStart(2,'0'))
   const [cantidades, setCantidades] = useRecoilState(dailyQtyForMonth)
   const [user] = useRecoilState(userState)
+  const setError = useSetRecoilState(errorState)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -21,7 +21,11 @@ const Turnos = () => {
         const data = await turnosService.getQtyByYearMonth(`${year}-${month}`)
         setCantidades(data)
       } catch(err) {
-        console.log(err)
+        if (err instanceof Error) {
+          setError({ title: err.name, message: err.message })
+        } else {
+          console.log(err)
+        }
       }
     }
 
@@ -29,7 +33,7 @@ const Turnos = () => {
 
     void fetchTurnos();
 
-  }, [user, navigate, month, year, setCantidades])
+  }, [user, navigate, month, year, setCantidades, setError])
 
   return(
     <div className='p-10'>

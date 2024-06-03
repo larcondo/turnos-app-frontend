@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { useRecoilState } from 'recoil'
-import { dayTurnsQty } from '@/states/atoms'
+import { useRecoilState, useSetRecoilState } from 'recoil'
+import { dayTurnsQty, errorState } from '@states/atoms'
 import { formattedDateString } from '@utils/formatting'
 
 import turnosService from '@services/turnos'
@@ -12,6 +12,7 @@ const Loading = () => <p>Loading...</p>
 const CantidadesDelDia = () => {
   const [cantidades, setCantidades] = useRecoilState(dayTurnsQty)
   const [loading, setLoading] = useState<boolean>(true)
+  const setError = useSetRecoilState(errorState)
   const { fecha } = useParams()
 
   useEffect(() => {
@@ -23,12 +24,16 @@ const CantidadesDelDia = () => {
           setLoading(false)
         }  
       } catch(err) {
-        console.log(err)
+        if (err instanceof Error) {
+          setError({ title: err.name, message: err.message })
+        } else {
+          console.log(err)
+        }
       }
     }
     
     void fetchTurnos()
-  }, [fecha, setCantidades])
+  }, [fecha, setCantidades, setError])
 
   if (loading) return <Loading />
 

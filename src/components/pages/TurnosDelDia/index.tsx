@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { useRecoilState } from 'recoil'
-import { dayInfo } from '@/states/atoms'
+import { useRecoilState, useSetRecoilState } from 'recoil'
+import { dayInfo, errorState } from '@states/atoms'
 import { formattedDateString } from '@utils/formatting'
 
 import turnService from '@services/turnos'
@@ -11,6 +11,7 @@ import TurnoRow from './TurnRow'
 const TurnosDelDia = () => {
   const [searchParams] = useSearchParams()
   const [info, setInfo] = useRecoilState(dayInfo)
+  const setError = useSetRecoilState(errorState)
   const [cancha] = useState(searchParams.get('cancha'))
   const [fecha] = useState(searchParams.get('fecha'))
 
@@ -22,13 +23,17 @@ const TurnosDelDia = () => {
           setInfo(data)
         }
       } catch(err) {
-        console.log(err)
+        if (err instanceof Error) {
+          setError({ title: err.name, message: err.message })
+        } else {
+          console.log(err)
+        }
       }
     }
     
     void fetchInfo()
     
-  }, [fecha, cancha, setInfo])
+  }, [fecha, cancha, setInfo, setError])
 
   return(
     <div className='p-10'>
