@@ -1,14 +1,13 @@
 import { ErrorState } from "@/types"
 import { useEffect, useState } from "react"
-import { SetterOrUpdater } from "recoil"
 import { MdClose, MdErrorOutline } from "react-icons/md"
 
-const visibleClass = "flex justify-center absolute top-5 w-full animate-appear"
-const hiddenClass = "flex justify-center absolute top-5 w-full animate-disappear"
+const visibleClass = "flex justify-center fixed top-5 w-full animate-appear"
+const hiddenClass = "flex justify-center fixed top-5 w-full animate-disappear"
 
 interface AlertErrorProps {
   error: ErrorState;
-  onClose: SetterOrUpdater<ErrorState>;
+  onClose: (value: ErrorState) => void;
 }
 
 const AlertError = ({ error, onClose }: AlertErrorProps) => {
@@ -20,6 +19,8 @@ const AlertError = ({ error, onClose }: AlertErrorProps) => {
       setRetained({ message, title })
     }
   }, [message, title])
+
+  const onCloseAlert = () => onClose({})
 
   if (!retained.message && !retained.title) return null
 
@@ -34,12 +35,12 @@ const AlertError = ({ error, onClose }: AlertErrorProps) => {
           <div className="pr-2">
             <MdErrorOutline size={25} />
           </div>
-          <div>
+          <div className="flex-1">
             <p className="font-bold">{ retained.title }</p>
             <p className="text-sm">{ retained.message }</p>
           </div>
           <button className="aspect-square p-2 hover:bg-rose-200 rounded"
-            onClick={() => onClose({})}
+            onClick={onCloseAlert}
           >
             <MdClose />
           </button>

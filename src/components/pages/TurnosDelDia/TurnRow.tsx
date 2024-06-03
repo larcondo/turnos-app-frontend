@@ -1,8 +1,10 @@
 import { TurnRecord } from '@/types'
 import { useRecoilState  } from 'recoil'
-import { dayInfo } from '@/states/atoms'
+import { dayInfo } from '@states/atoms'
+import { BiLoaderAlt } from 'react-icons/bi'
 
 import turnosService from '@services/turnos'
+import { useState } from 'react'
 
 // classes
 const buttonNormal: string = 'bg-teal-500 p-4 rounded-md text-slate-50 hover:bg-teal-600'
@@ -11,10 +13,12 @@ const buttonDisabled: string = 'bg-teal-200 p-4 rounded-md text-teal-400'
 // Props types
 interface TurnoRowProps {
   turno: TurnRecord;
+  onFailed: (err: Error) => void;
 }
 
-const TurnoRow = ({ turno }: TurnoRowProps) => {
+const TurnoRow = ({ turno, onFailed }: TurnoRowProps) => {
   const [info, setInfo] = useRecoilState(dayInfo)
+  const [requesting, setRequesting] = useState<boolean>(false)
 
   if (!turno) return null
   if (!info) return null
@@ -22,6 +26,7 @@ const TurnoRow = ({ turno }: TurnoRowProps) => {
   const solicitar = async () => {
     try {
       const id = turno.id
+      setRequesting(true)
       const data = await turnosService.requestTurn(id)
 
       setInfo(curr => {
@@ -33,8 +38,14 @@ const TurnoRow = ({ turno }: TurnoRowProps) => {
         })
         return { ...curr, turnos }
       })
+
+      setRequesting(false)
     } catch(err) {
-      console.log(err)
+      if (err instanceof Error) {
+        onFailed(err)
+      } else {
+        console.log(err)
+      }
     }
   }
 
@@ -54,7 +65,8 @@ const TurnoRow = ({ turno }: TurnoRowProps) => {
     <div className='bg-teal-100 py-4 px-6 rounded-md flex justify-between items-center'>
       <p className={timeClass}>{ turno.inicio } a { turno.fin } hs</p>
       <p className={estadoClass}>{ turno.estado }</p>
-      <div>
+      
+      <div className='relative'>
         <button
           className={buttonClass}
           disabled={turno.estado !== 'disponible'}
@@ -62,6 +74,12 @@ const TurnoRow = ({ turno }: TurnoRowProps) => {
         >
           Solicitar
         </button>
+
+        { requesting && 
+          <div className=' absolute top-0 left-0 w-full h-full flex items-center justify-center'>
+            <BiLoaderAlt size={24} className='animate-spin text-slate-50' />
+          </div>
+        }
       </div>
     </div>
   )

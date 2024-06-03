@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
-import { CountGroup } from '@/services/turnos'
+import { CountGroup } from '@services/turnos'
 
-const containerClass = 'grid grid-cols-2 gap-6 w-96 m-auto'
+const containerClass = 'grid grid-cols-2 gap-6 w-96 m-auto animate-appear'
 const cantBlockClass = 'p-6 bg-teal-300 flex flex-col items-center rounded'
 
 const CantidadesGrid = ({ cant, day }: { cant: CountGroup[], day: string }) => {

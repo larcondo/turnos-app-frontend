@@ -6,12 +6,11 @@ import { formattedDateString } from '@utils/formatting'
 
 import turnosService from '@services/turnos'
 import CantidadesGrid from './CantidadesGrid'
-
-const Loading = () => <p>Loading...</p>
+import Loading from '@components/common/Loading'
 
 const CantidadesDelDia = () => {
   const [cantidades, setCantidades] = useRecoilState(dayTurnsQty)
-  const [loading, setLoading] = useState<boolean>(true)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
   const setError = useSetRecoilState(errorState)
   const { fecha } = useParams()
 
@@ -21,7 +20,7 @@ const CantidadesDelDia = () => {
         if (typeof fecha === 'string') {
           const data = await turnosService.countByDate(fecha)
           setCantidades(data)
-          setLoading(false)
+          setTimeout(() => setIsLoading(false), 500)
         }  
       } catch(err) {
         if (err instanceof Error) {
@@ -35,7 +34,9 @@ const CantidadesDelDia = () => {
     void fetchTurnos()
   }, [fecha, setCantidades, setError])
 
-  if (loading) return <Loading />
+  if (isLoading) return <div className='flex justify-center pt-36'>
+    <Loading />
+  </div>
 
   return(
     <div className='p-10 min-h-screen'>

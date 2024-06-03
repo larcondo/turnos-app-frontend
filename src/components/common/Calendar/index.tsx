@@ -43,7 +43,7 @@ const Calendar = ({ data, year, month }: CalendarProps) => {
   const daysArray = generateDaysArray(fecha)
 
   return(
-    <div className='grid grid-cols-7 gap-1 my-10 mx-auto w-3/5'>
+    <div className='grid grid-cols-7 gap-1 my-10 mx-auto w-3/5 animate-appear'>
       <div className='col-span-full text-center'>{ daysArray.title }</div>
 
       <div className={headerClass}>Lunes</div>

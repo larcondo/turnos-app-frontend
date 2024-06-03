@@ -9,7 +9,7 @@ const Solicitar = () => {
     <div className='p-10'>
       <h1 className='text-2xl'>Solicitar Turnos</h1>
 
-      <div className='flex justify-around py-10'>
+      <div className='flex justify-around py-10 animate-appear'>
         { courts.map(c => <button className={buttonClass} key={c}>{ c }</button>) }
       </div>
     </div>

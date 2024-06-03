@@ -1,16 +1,18 @@
 import { useNavigate } from 'react-router-dom'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 import { userState, userTurns, errorState } from '@states/atoms'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 import turnosService from '@services/turnos'
 
 import TurnosTable from '@components/pages/Turnos/TurnosTable'
+import Loading from '@components/common/Loading'
 
 const TurnosDeUsuario = () => {
   const [user] = useRecoilState(userState)
   const [myTurns, setMyTurns] = useRecoilState(userTurns)
   const setError = useSetRecoilState(errorState)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -18,7 +20,7 @@ const TurnosDeUsuario = () => {
       try {
         const { turnos } = await turnosService.getByClient()
         setMyTurns(turnos)
-        throw new Error('Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique nulla quae molestias aut autem ab, accusantium cupiditate nemo eius animi.')
+        setTimeout(() => setIsLoading(false), 500)
       } catch(err) {
         if (err instanceof Error) {
           setError({ title: err.name, message: err.message })
@@ -33,6 +35,10 @@ const TurnosDeUsuario = () => {
     void fetchTurnos()
 
   }, [user, navigate, setMyTurns, setError])
+
+  if (isLoading) return <div className='flex justify-center pt-36'>
+    <Loading />
+  </div>
 
   return(
     <div className='p-10'>
