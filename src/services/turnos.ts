@@ -61,6 +61,18 @@ const requestTurn = async (id: string) => {
   return data;
 }
 
+interface ConfirmTurnRes {
+  id: string;
+  confirmadoPor: string;
+  estado: string;
+}
+
+const confirmTurn = async (id: string) => {
+  const url: string = `/turnos/confirmar/${id}`;
+  const { data } = await axiosWithAuth.post<ConfirmTurnRes>(url);
+  return data;
+} 
+
 export default {
   getAll,
   getQtyByYearMonth,
@@ -70,4 +82,5 @@ export default {
   getByClient,
   getRequested,
   requestTurn,
+  confirmTurn,
 }

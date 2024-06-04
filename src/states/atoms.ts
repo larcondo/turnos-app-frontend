@@ -1,5 +1,8 @@
 import { atom } from 'recoil'
-import { UserInformation, TurnResponse, CantidadPorFecha, TurnRecord, ErrorState } from '@/types';
+import {
+  UserInformation, TurnResponse, CantidadPorFecha,
+  TurnRecord, ErrorState, TurnRequested
+} from '@/types';
 import { CountGroup } from '@services/turnos';
 
 export const userState = atom<UserInformation|null>({
@@ -30,6 +33,11 @@ export const dailyQtyForMonth = atom<CantidadPorFecha[]>({
 
 export const dayTurnsQty = atom<CountGroup[]>({
   key: 'dayTurnsQty',
+  default: []
+});
+
+export const requestedTurnsAtom = atom<TurnRequested[]>({
+  key: 'requestedTurnsAtom',
   default: []
 });
 
