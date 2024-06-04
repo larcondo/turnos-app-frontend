@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import { useRecoilState } from 'recoil';
 import { useNavigate } from 'react-router-dom';
 import { userState} from '@states/atoms';
@@ -6,13 +5,14 @@ import { UserRoles } from '@/types';
 
 import userService from '@services/usuarios';
 
+import TopNavLink from './TopNavLink';
+
 const TopNav = () => {
   const [user, setUser] = useRecoilState(userState);
   const navigate = useNavigate();
 
-  const navTitleClass: string = 'text-3xl';
-  const linkClass: string = 'py-2 px-6 hover:bg-black/5 cursor-pointer';
-  // const linkActiveClass: string = 'py-2 px-6 hover:bg-black/5 cursor-pointer border-b-2 border-teal-500';
+  const navTitleClass: string = 'text-3xl py-4';
+  const linkClass: string = 'py-2 px-6 hover:bg-black/5 cursor-pointer border-b-2 border-teal-200 text-teal-800';
 
   const logout = async () => {
     try {
@@ -27,15 +27,16 @@ const TopNav = () => {
   }
 
   return(
-    <div className='flex px-6 py-4 justify-between items-center bg-teal-200'>
+    <div className='flex justify-between items-end bg-teal-200 px-6'>
       <h1 className={navTitleClass}>
         Turnos
       </h1>
-      <div className='flex justify-center'>
-        { user && <Link to='/' className={linkClass}>Turnos</Link> }
-        { user && <Link to='/solicitar' className={linkClass}>Solicitar</Link> }
-        { user && user.rol === UserRoles.Client && <Link to='/misturnos' className={linkClass}>Mis turnos</Link> }
-        { user && user.rol === UserRoles.Admin && <Link to='/solicitar' className={linkClass}>Crear Turnos</Link> }
+      <div className='flex'>
+        { user && <TopNavLink to='/' text='Turnos' /> }
+        { user && <TopNavLink to='/solicitar' text='Solicitar' /> }
+        { user && user.rol === UserRoles.Client && <TopNavLink to='/misturnos' text='Mis turnos' /> }
+        { user && user.rol === UserRoles.Admin && <TopNavLink to='/crear' text='Crear Turnos' /> }
+        { user && user.rol === UserRoles.Admin && <TopNavLink to='/solicitados' text='Solicitados' /> }
         { user && <button className={linkClass} onClick={logout}>Log out</button> }
       </div>
     </div>

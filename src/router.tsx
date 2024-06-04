@@ -7,6 +7,8 @@ import Solicitar from '@components/pages/Solicitar'
 import TurnosDeUsuario from '@components/pages/TurnosDeUsuario'
 import CantidadesDelDia from '@components/pages/CantidadesDelDia'
 import TurnosDelDia from '@components/pages/TurnosDelDia'
+import TurnosSolicitados from '@components/pages/TurnosSolicitados'
+import NotFound from '@components/pages/NotFound'
 
 const router = createBrowserRouter([
   {
@@ -15,7 +17,6 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        // path: '/turnos',
         element: <Turnos />,
       },
       {
@@ -37,6 +38,14 @@ const router = createBrowserRouter([
       {
         path: '/misturnos',
         element: <TurnosDeUsuario />,
+      },
+      {
+        path: '/solicitados',
+        element: <TurnosSolicitados />,
+      },
+      {
+        path: '*',
+        element: <NotFound />
       }
     ]
   }

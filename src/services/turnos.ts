@@ -1,5 +1,5 @@
 import axiosWithAuth from './axios';
-import { CantidadPorFecha, TurnResponse, TurnStates } from '@/types';
+import { CantidadPorFecha, TurnResponse, TurnStates, TurnRequested } from '@/types';
 
 const getAll = async () => {
   const url: string = '/turnos';
@@ -43,6 +43,12 @@ const getByClient = async () => {
   return data;
 }
 
+const getRequested = async (fecha: string) => {
+  const url: string = `/turnos/solicitados?fecha=${fecha}`;
+  const { data } = await axiosWithAuth.get<TurnRequested[]>(url);
+  return data;
+}
+
 interface RequestTurnRes {
   id: string;
   solicitadoPor: string;
@@ -62,5 +68,6 @@ export default {
   countByDate,
   getDaysTurns,
   getByClient,
+  getRequested,
   requestTurn,
 }

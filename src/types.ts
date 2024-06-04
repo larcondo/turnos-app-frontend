@@ -12,6 +12,11 @@ export interface TurnRecord extends TurnBasic {
   confirmadoPor: string | null;
 }
 
+export interface TurnRequested extends TurnRecord {
+  nombre: string;
+  email: string;
+}
+
 export enum TurnStates {
   Disponible = 'disponible',
   Solicitado = 'solicitado',
