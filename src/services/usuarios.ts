@@ -24,7 +24,14 @@ const logout = async () => {
   return { data, status }
 }
 
+const autoLogin = async () => {
+  const url: string = `${authBaseUrl}/usuarios/refresh`
+  const { data } = await axios.get<UserInformation>(url)
+  return data;
+}
+
 export default {
   login,
-  logout
+  logout,
+  autoLogin,
 }

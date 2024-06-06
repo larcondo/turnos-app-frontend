@@ -2,6 +2,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil'
 import { userState, dailyQtyForMonth, errorState } from '@states/atoms';
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { autoLoginCookie } from '@utils/cookies';
 
 import turnosService from '@services/turnos';
 
@@ -32,7 +33,7 @@ const Turnos = () => {
       }
     }
 
-    if (!user) return navigate('/login')
+    if (!autoLoginCookie()) return navigate('/login')
 
     void fetchTurnos();
 

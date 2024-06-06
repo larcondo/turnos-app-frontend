@@ -1,11 +1,12 @@
 import { atom } from 'recoil'
 import {
-  UserInformation, TurnResponse, CantidadPorFecha,
-  TurnRecord, ErrorState, TurnRequested
+  TurnResponse, CantidadPorFecha,
+  TurnRecord, ErrorState, TurnRequested,
+  UserBasicInformation
 } from '@/types';
 import { CountGroup } from '@services/turnos';
 
-export const userState = atom<UserInformation|null>({
+export const userState = atom<UserBasicInformation | null>({
   key: 'userState',
   default: null
 });

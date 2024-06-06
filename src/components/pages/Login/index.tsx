@@ -2,18 +2,19 @@ import { useNavigate } from 'react-router-dom'
 import { useRecoilState } from 'recoil'
 import { userState } from '@states/atoms'
 import { setToken } from '@utils/token'
-import { UserInformation } from '@/types'
+import { UserBasicInformation, UserInformation } from '@/types'
 
 import LoginForm from './LoginForm'
 
 const Login = () => {
-  const [, setUser] = useRecoilState<UserInformation | null>(userState)
+  const [, setUser] = useRecoilState<UserBasicInformation | null>(userState)
   const navigate = useNavigate()
 
   const onSuccess = (resultado: UserInformation) => {
     if (resultado.accessToken) {
-      setUser(resultado)
-      setToken(resultado.accessToken)
+      const { accessToken, ...basicInfo } = resultado
+      setUser(basicInfo)
+      setToken(accessToken)
       navigate('/')
     }
   }

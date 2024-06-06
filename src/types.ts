@@ -51,6 +51,8 @@ export interface UserInformation {
   rol: string;
 }
 
+export type UserBasicInformation = Omit<UserInformation, 'accessToken'>;
+
 export enum UserRoles {
   Admin = 'admin',
   Client = 'client',
