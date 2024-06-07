@@ -25,6 +25,7 @@
       "@/*": ["src/*"],
       "@assets/*": ["src/assets/*"],
       "@components/*": ["src/components/*"],
+      "@hooks/*": ["src/hooks/*"],
       "@services/*": ["src/services/*"],
       "@states/*": ["src/states/*"],
       "@utils/*": ["src/utils/*"],
