@@ -1,19 +1,25 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { authBaseUrl } from '@/contants';
 import { UserCredentials, UserInformation } from '@/types';
+import { LoginResponse } from './types';
 
 axios.defaults.withCredentials = true;
 
-const login = async (credentials: UserCredentials) => {
+const login = async (credentials: UserCredentials): Promise<LoginResponse> => {
   const url: string = `${authBaseUrl}/usuarios/login`
+  const headers = { 'Content-Type': 'application/json' }
 
-  const { data } = await axios.post<UserInformation>(url, credentials, {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-  
-  return data
+  try {
+    const { data } = await axios.post<UserInformation>(url, credentials, { headers })
+    return { data }
+  } catch(err) {
+    if (err instanceof AxiosError && err.response) {
+      const { field, message } = err.response.data
+      return {error: err, requestError: { field, message } }
+    }
+
+    return { error: err }
+  }
 };
 
 const logout = async () => {
